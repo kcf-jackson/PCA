@@ -12,7 +12,7 @@
 #' @examples 
 #' X <- matrix(rnorm(1000), 100, 10)
 #' rotation <- PCA_L1_max(X, 3)
-#' Z <- X %*% t(rotation)
+#' Z <- X %*% rotation
 #' # Toy example from the paper
 #' X <- cbind(c(-6:-2, 10, 0:4), c(-5:5))
 #' w <- PCA_L1_max(X, 1)  # expect w_L1 = [0.8, 0.6]
@@ -35,7 +35,7 @@ PCA_L1_max <- function(X, m, w, turbo = F, remove_mean = T, tol = 1e-6) {
     if (turbo) w <- turbo_start(basis[,j], W, j)
     W[j,] <- PCA_L1_max_single_vec(X, w, tol)
   }
-  W
+  t(W)
 }
 
 PCA_L1_max_single_vec <- function(X, w, tol = 1e-6) {
@@ -67,7 +67,7 @@ PCA_L1_max_single_vec <- function(X, w, tol = 1e-6) {
 }
 
 get_pc_variance <- function(W, X) {
-  pc_var <- apply((X %*% t(W))^2, 2, mean)
+  pc_var <- apply((X %*% W)^2, 2, mean)
   total_var <- mean(apply(X, 1, euclidean_norm)^2)
   list(pc_var = pc_var, total_var = total_var)
 }
