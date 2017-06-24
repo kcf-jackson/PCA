@@ -50,7 +50,6 @@ all.equal(abs(rotation_1), abs(rotation_2))
 # Performance comparison
 library(microbenchmark)
 microbenchmark(
-  X <- create_low_rank_matrix(n, p, r),
   r1 <- qr_pca(X, m), 
   r2 <- svd_pca(X, m = m),
   times = 100
@@ -66,7 +65,8 @@ microbenchmark(
 #' Summary: The improvement of using the QR methods really comes from the fact 
 #' that the data matrix X has a rank much smaller than the dimension (both n 
 #' and p), so the QR step could "throw away" a big chunk of the matrix, easing 
-#' the burdle of the subsequent SVD step.
+#' the burdle of the subsequent SVD step. The result doesn't hold when the rank
+#' of the matrix is close to the matrix dimension.
 #' Opinion: The result seems somewhat artifical. Basically, it's like 
 #' preconditioning the matrix before attempting the SVD, but I imagine there 
 #' are some situations in practice that could benefit from this. 
