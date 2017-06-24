@@ -58,7 +58,10 @@ microbenchmark(
 
 #==============================================================================
 # Results and Summary
-
+# Unit: seconds
+#         expr               min      lq    mean  median      uq     max  neval  cld
+# r1 <- qr_pca(X, m)      829.34  840.30  848.40  850.79  855.51  861.90     10    a
+# r2 <- svd_pca(X, m = m) 884.10  909.14  924.14  930.50  940.90  945.32     10    b
 #------------------------------------------------------------------------------
 #' Summary: The improvement of using the QR methods really comes from the fact 
 #' that the data matrix X has a rank much smaller than the dimension (both n 
