@@ -56,10 +56,13 @@ microbenchmark(
 
 #==============================================================================
 # Results and Summary
-# Unit: milliseconds
+# Unit: seconds
+#                             expr    min     lq   mean median     uq    max neval cld
+# ans <- fastPCA(X, h, tol = 0.01) 108.20 108.80 110.55 110.62 111.12 113.92    10  a 
+# ans2 <- svd_pca(X, h)            384.04 395.15 397.01 398.45 402.68 403.52    10   b
 #------------------------------------------------------------------------------
-#' Sidenote: When tolerance is set to 0.01 as suggested in the paper, the eigenvectors 
-#' differ a lot from the 'true' ones. They still form a orthonomal basis, so the MSE 
-#' computed in the paper is legitimate, but they are off in terms of the explained 
-#' variance and the ordering of the eigenvectors. This goes away when the tolerance 
-#' is set to around 1e-10, but it leads to a significant increase of computation time.
+# Sidenote: When tolerance is set to 0.01 as suggested in the paper, the eigenvectors 
+# differ a lot from the 'true' ones. They still form a orthonomal basis, so the MSE 
+# computed in the paper is legitimate, but they are off in terms of the explained 
+# variance and the ordering of the eigenvectors. This goes away when the tolerance 
+# is set to around 1e-10, but it leads to a significant increase of computation time.
